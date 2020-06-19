@@ -3,15 +3,15 @@ import axios from 'axios';
 
 function Home({ products }) {
   console.log(products);
-  const getProducts = async () => {
-    const url = 'http://localhost:3000/api/products';
-    const response = await axios.get(url);
-    console.log(response.data);
-  };
+  // const getProducts = async () => {
+  //   const url = 'http://localhost:3000/api/products';
+  //   const response = await axios.get(url);
+  //   console.log(response.data);
+  // };
 
-  useEffect(() => {
-    getProducts();
-  }, []);
+  // useEffect(() => {
+  //   getProducts();
+  // }, []);
 
   return <>home</>;
 }
