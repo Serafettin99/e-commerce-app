@@ -124,13 +124,13 @@
     "sku": "135-28-0671",
     "mediaUrl": "https://res-5.cloudinary.com/dwpujv6in/image/upload/c_pad,dpr_2.0,f_auto,h_930,q_auto,w_930/v1/media/catalog/product/j/v/jv1_coatrk_tm_frontlow-splash-coat-rack-tomato-white-oak.jpg"
   },
-  // {
-  //   "name": "Micheline Charlson",
-  //   "price": 119.18,
-  //   "description": "Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti.",
-  //   "sku": "738-62-1356",
-  //   "mediaUrl": "https://res-1.cloudinary.com/dwpujv6in/image/upload/c_pad,dpr_2.0,f_auto,h_930,q_auto,w_930/v1/media/catalog/product/d/k/dk1_sqrplw_mg_front.jpg"
-  // },
+  {
+    "name": "Micheline Charlson",
+    "price": 119.18,
+    "description": "Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti.",
+    "sku": "738-62-1356",
+    "mediaUrl": "https://res-1.cloudinary.com/dwpujv6in/image/upload/c_pad,dpr_2.0,f_auto,h_930,q_auto,w_930/v1/media/catalog/product/d/k/dk1_sqrplw_mg_front.jpg"
+  },
   {
     "name": "Hughie Jeffryes",
     "price": 1199.57,
