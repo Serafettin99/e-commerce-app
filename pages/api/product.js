@@ -1,4 +1,4 @@
-import Product from '../../models/Product';
+import Product from '../../models/Product.js';
 
 export default async (req, res) => {
   const { _id } = req.query;
