@@ -1,8 +1,15 @@
 import axios from 'axios';
+import ProductSummary from '../components/Product/ProductSummary';
+import ProductAttributes from '../components/Product/ProductAttributes';
 
 export const Product = ({ product }) => {
   console.log({ product });
-  return <div>product</div>;
+  return (
+    <>
+      <ProductSummary {...product} />
+      <ProductAttributes {...product} />
+    </>
+  );
 };
 
 Product.getInitialProps = async ({ query: { _id } }) => {

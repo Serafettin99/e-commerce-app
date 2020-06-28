@@ -1,28 +1,24 @@
-import product from '../../pages/api/product';
-import { Item, ItemGroup, Label } from 'semantic-ui-react';
-import AddProductToCart from './AddProductToCart';
+import { Item, Label } from 'semantic-ui-react';
+import AddProductToCard from './AddProductToCart';
 
 const ProductSummary = ({ name, mediaUrl, _id, price, sku }) => {
-  console.log({ name, mediaUrl, _id, price, sku, line: 'productSummary 6' });
-
   return (
     <>
-      <ItemGroup>
+      <Item.Group>
         <Item>
-          {' '}
+          <Item.Image size='medium' src={mediaUrl} />
           <Item.Content>
-            <Item.Image size='medium' src={mediaUrl} />
-            <Item.Header> {name}</Item.Header>
+            <Item.Header>{name}</Item.Header>
             <Item.Description>
               <p>${price}</p>
               <Label>SKU: {sku}</Label>
             </Item.Description>
             <Item.Extra>
-              <AddProductToCart productId={_id} />
+              <AddProductToCard productId={_id} />
             </Item.Extra>
           </Item.Content>
         </Item>
-      </ItemGroup>
+      </Item.Group>
     </>
   );
 };
