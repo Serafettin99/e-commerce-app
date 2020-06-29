@@ -1,5 +1,15 @@
-function CartSummary() {
-  return <>CartSummary</>;
-}
+import { Divider, Segment, Button } from 'semantic-ui-react';
+
+const CartSummary = () => {
+  return (
+    <>
+      <Divider />
+      <Segment clearing size='large'>
+        <strong> Sub total:</strong> $0.00
+        <Button icon='cart' color='teal' floated='right' content='checkout' />
+      </Segment>
+    </>
+  );
+};
 
 export default CartSummary;
