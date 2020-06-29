@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 import {
   Form,
@@ -10,6 +11,7 @@ import {
   Header,
   Icon,
 } from 'semantic-ui-react';
+import baseUrl from '../utils/baseUrl';
 
 const INITIAL_PRODUCT = {
   name: '',
@@ -22,7 +24,7 @@ const CreateProduct = () => {
   const [product, setProduct] = useState(INITIAL_PRODUCT);
   const [mediaPreview, setMediaPreview] = useState('');
   const [success, setSuccess] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (event) => {
     const { name, value, files } = event.target;
     if (name === 'media') {
@@ -30,9 +32,31 @@ const CreateProduct = () => {
       setMediaPreview(window.URL.createObjectURL(files[0]));
     } else setProduct((prevState) => ({ ...prevState, [name]: value }));
   };
-  const handleSubmit = (event) => {
+
+  const handleImageUpload = async () => {
+    const data = new FormData();
+    data.append('file', product.media);
+    data.append('upload_preset', 'reactreserve');
+    data.append('cloud_name', 'darnmrm8t');
+    const response = await axios.post(process.env.CLOUDINARY_URL, data);
+    const mediaUrl = response.data.url;
+    return mediaUrl;
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({ product });
+    setLoading(true);
+    const mediaUrl = await handleImageUpload();
+
+    console.log({ mediaUrl });
+    const url = `${baseUrl}/api/product`;
+
+    const payload = { ...product, mediaUrl };
+    const response = await axios.post(url, payload);
+    setLoading(false);
+
+    console.log({ resp: response.config.data });
+
     setProduct(INITIAL_PRODUCT);
     setSuccess(true);
   };
@@ -42,7 +66,7 @@ const CreateProduct = () => {
       <Header as='h2' block>
         <Icon name='add' color='orange' />
       </Header>
-      <Form success={success} onSubmit={handleSubmit}>
+      <Form loading={loading} success={success} onSubmit={handleSubmit}>
         <Message
           success
           icon='check'
@@ -90,10 +114,11 @@ const CreateProduct = () => {
         />
         <Form.Field
           control={Button}
-          color='description'
+          disabled={loading}
+          color='blue'
           icon='pencil alternate'
           content='Submit'
-          type='Submit'
+          type='submit'
         />
       </Form>
     </>

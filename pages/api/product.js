@@ -1,4 +1,7 @@
 import Product from '../../models/Product.js';
+import connectDb from '../../utils/connectDb';
+
+connectDb();
 
 const handleGetRequest = async (req, res) => {
   const { _id } = req.query;
@@ -12,10 +15,22 @@ const handleDeleteRequest = async (req, res) => {
   res.status(204).json({});
 };
 
+const handlePostRequest = async (req, res) => {
+  const { name, price, description, mediaUrl } = req.body;
+  if (!name || !price || !description || !mediaUrl) {
+    return res.status(422).send('Product missing one or more fields');
+  }
+  const product = new Product({ name, price, description, mediaUrl }).save();
+  return res.status(201).json({ product, message: 'post req successful' });
+};
+
 export default async (req, res) => {
   switch (req.method) {
     case 'GET':
       await handleGetRequest(req, res);
+      break;
+    case 'POST':
+      await handlePostRequest(req, res);
       break;
     case 'DELETE':
       await handleDeleteRequest(req, res);
