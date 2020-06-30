@@ -1,5 +1,109 @@
-function Login() {
-  return <>login</>;
-}
+import { useState, useEffect } from 'react';
+
+import { Button, Form, Icon, Message, Segment } from 'semantic-ui-react';
+import Link from 'next/link';
+import catchErrors from '../utils/catchErrors';
+
+const INITIAL_USER = {
+  email: '',
+  password: '',
+};
+
+const Login = () => {
+  const [user, setUser] = useState(INITIAL_USER);
+  const [disabled, setDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const isUser = Object.values(user).every((el) => Boolean(el));
+    isUser ? setDisabled(false) : setDisabled(true);
+  }, [user]);
+
+  const handleChange = (event) => {
+    // console.log({ value: event.target.value });
+    const { name, value } = event.target;
+    setUser((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = async () => {
+    event.preventDefault();
+    try {
+      setLoading(true);
+      setError('');
+      console.log(user);
+      // make request to Login user
+    } catch (err) {
+      catchErrors(err, setError);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <Message
+        attached
+        icon='privacy'
+        header='Welcome Back!'
+        content='Log in with email and password'
+        color='blue'
+      />{' '}
+      <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit}>
+        <Message error header='Oops!' content={error} />
+        <Segment>
+          <Form.Input
+            fluid
+            icon='user'
+            iconPosition='left'
+            label='Name'
+            placeHolder='Name'
+            name='name'
+            value={user.name}
+            onChange={handleChange}
+          />
+
+          <Form.Input
+            fluid
+            icon='envelope'
+            iconPosition='left'
+            label='E-Mail'
+            placeHolder='E-Mail'
+            type='email'
+            name='email'
+            value={user.email}
+            onChange={handleChange}
+          />
+
+          <Form.Input
+            fluid
+            icon='lock'
+            iconPosition='left'
+            label='Password'
+            placeHolder='Password'
+            name='password'
+            type='password'
+            value={user.password}
+            onChange={handleChange}
+          />
+          <Button
+            disabled={disabled || loading}
+            icon='sign in'
+            type='submit'
+            color='orange'
+            content='Login'
+          />
+        </Segment>
+      </Form>
+      <Message attached='bottom' warning>
+        <Icon name='help' /> New user?{' '}
+        <Link href='/login'>
+          <a>Sign up here</a>
+        </Link>{' '}
+        instead.
+      </Message>
+    </>
+  );
+};
 
 export default Login;
