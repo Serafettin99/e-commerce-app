@@ -62,7 +62,7 @@ const Login = () => {
             icon='envelope'
             iconPosition='left'
             label='E-Mail'
-            placeHolder='E-Mail'
+            placeholder='E-Mail'
             type='email'
             name='email'
             value={user.email}
@@ -74,7 +74,7 @@ const Login = () => {
             icon='lock'
             iconPosition='left'
             label='Password'
-            placeHolder='Password'
+            placeholder='Password'
             name='password'
             type='password'
             value={user.password}

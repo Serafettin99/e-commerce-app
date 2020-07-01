@@ -63,7 +63,7 @@ const Signup = () => {
             icon='user'
             iconPosition='left'
             label='Name'
-            placeHolder='Name'
+            placeholder='Name'
             name='name'
             value={user.name}
             onChange={handleChange}
@@ -74,7 +74,7 @@ const Signup = () => {
             icon='envelope'
             iconPosition='left'
             label='E-Mail'
-            placeHolder='E-Mail'
+            placeholder='E-Mail'
             type='email'
             name='email'
             value={user.email}
@@ -86,7 +86,7 @@ const Signup = () => {
             icon='lock'
             iconPosition='left'
             label='Password'
-            placeHolder='Password'
+            placeholder='Password'
             name='password'
             type='password'
             value={user.password}
