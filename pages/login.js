@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 
 import { Button, Form, Icon, Message, Segment } from 'semantic-ui-react';
 import Link from 'next/link';
+import axios from 'axios';
 import catchErrors from '../utils/catchErrors';
+import baseUrl from '../utils/baseUrl';
+import { handleLogin } from '../utils/auth';
 
 const INITIAL_USER = {
   email: '',
@@ -31,8 +34,10 @@ const Login = () => {
     try {
       setLoading(true);
       setError('');
-      console.log(user);
-      // make request to Login user
+      const url = `${baseUrl}/api/login`; // make request to Login user
+      const payload = { ...user };
+      const response = await axios.post(url, payload);
+      handleLogin(response.data);
     } catch (err) {
       catchErrors(err, setError);
     } finally {
@@ -52,17 +57,6 @@ const Login = () => {
       <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit}>
         <Message error header='Oops!' content={error} />
         <Segment>
-          <Form.Input
-            fluid
-            icon='user'
-            iconPosition='left'
-            label='Name'
-            placeHolder='Name'
-            name='name'
-            value={user.name}
-            onChange={handleChange}
-          />
-
           <Form.Input
             fluid
             icon='envelope'
