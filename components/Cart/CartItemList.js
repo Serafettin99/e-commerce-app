@@ -1,7 +1,7 @@
 import { Header, Segment, Button, Icon, Item } from 'semantic-ui-react';
 import { useRouter } from 'next/router';
 
-const CartItemList = ({ products, user }) => {
+const CartItemList = ({ products, user, handleRemoveFromCart }) => {
   const router = useRouter();
 
   const mapCartProductsTotItems = (products) => {
@@ -23,7 +23,7 @@ const CartItemList = ({ products, user }) => {
           basic
           icon='remove'
           floated='right'
-          onClick={() => console.log(p.product._id)}
+          onClick={() => handleRemoveFromCart(p.product._id)}
         />
       ),
     }));
@@ -50,7 +50,7 @@ const CartItemList = ({ products, user }) => {
     );
   }
 
-  return <Item.Group divider items={mapCartProductsTotItems(products)} />;
+  return <Item.Group divided items={mapCartProductsTotItems(products)} />;
 };
 
 export default CartItemList;
